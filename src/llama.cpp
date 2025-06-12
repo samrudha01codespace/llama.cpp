@@ -277,7 +277,7 @@ int32_t llama_chat_apply_template(
                                     bool   add_ass,
                                     char * buf,
                                  int32_t   length) {
-    const std::string curr_tmpl(tmpl == nullptr ? "chatml" : tmpl);
+    const std::string curr_tmpl(tmpl == nullptr ? "gemma" : tmpl);
 
     // format the chat to string
     std::vector<const llama_chat_message *> chat_vec;
