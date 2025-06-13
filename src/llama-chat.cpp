@@ -64,6 +64,7 @@ static const std::map<std::string, llm_chat_template> LLM_CHAT_TEMPLATES = {
     { "bailing",           LLM_CHAT_TEMPLATE_BAILING           },
     { "llama4",            LLM_CHAT_TEMPLATE_LLAMA4            },
     { "smolvlm",           LLM_CHAT_TEMPLATE_SMOLVLM           },
+    {"smollm",             LLM_CHAT_TEMPLATE_SMOLLM}
 };
 
 llm_chat_template llm_chat_template_from_str(const std::string & name) {

@@ -44,6 +44,8 @@ enum llm_chat_template {
     LLM_CHAT_TEMPLATE_LLAMA4,
     LLM_CHAT_TEMPLATE_SMOLVLM,
     LLM_CHAT_TEMPLATE_UNKNOWN,
+    LLM_CHAT_TEMPLATE_SMOLLM
+
 };
 
 struct llama_chat_message;
