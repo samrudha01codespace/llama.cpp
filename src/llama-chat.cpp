@@ -64,7 +64,7 @@ static const std::map<std::string, llm_chat_template> LLM_CHAT_TEMPLATES = {
     { "bailing",           LLM_CHAT_TEMPLATE_BAILING           },
     { "llama4",            LLM_CHAT_TEMPLATE_LLAMA4            },
     { "smolvlm",           LLM_CHAT_TEMPLATE_SMOLVLM           },
-    {"smollm",             LLM_CHAT_TEMPLATE_SMOLLM}
+    {"smollm",             LLM_CHAT_TEMPLATE_SMOLLM            }
 };
 
 llm_chat_template llm_chat_template_from_str(const std::string & name) {
@@ -644,7 +644,29 @@ int32_t llm_chat_apply_template(
         if (add_ass) {
             ss << "Assistant:";
         }
-    } else {
+    }else if (tmpl == LLM_CHAT_TEMPLATE_SMOLLM) {
+        // SmolLM
+        bool has_system = std::any_of(chat.begin(), chat.end(), [](const auto& m) {
+            return m->role == "system";
+        });
+
+        if (!has_system) {
+            ss << "<|im_start|>system\n"
+               << "You are a helpful assistant that replies concisely and clearly.<|im_end|>\n";
+        }
+
+        for (auto message : chat) {
+            std::string role(message->role);
+            ss << "<|im_start|>" << role << "\n" << message->content << "<|im_end|>\n";
+        }
+
+        if (add_ass) {
+            ss << "<|im_start|>assistant\n";
+        }
+    }
+
+
+    else {
         // template not supported
         return -1;
     }
